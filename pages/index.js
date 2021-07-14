@@ -2,7 +2,7 @@ import React from 'react';
 import MainGrid from "../src/components/MainGrid"
 import Box from "../src/components/Box"
 import { AlurakutMenu, AlurakutProfileSidebarMenuDefault, OrkutNostalgicIconSet } from '../src/lib/AlurakutCommons'
-import { ProfileRelationsBoxWrapper } from '../src/components/ProfileRelations'
+import { ProfileRelationsBoxWrapper, ProfileRelationsGallery } from '../src/components/ProfileRelations'
 
 function ProfileSidebar(props){
   return (
@@ -32,7 +32,7 @@ export default function Home() {
     'peas',
     'rafaballerini',
     'FihCapua',
-    'felipefialho'
+    'felipefialho',
   ];
 
   const [communitiesList, setCommunity] = React.useState([]);
@@ -96,31 +96,26 @@ export default function Home() {
               Pessoas da comunidade ({ friendList.length })
             </h2>
 
-            <ul>
+            {/* <ul>
               { friendList.length > 0 && friendList.map((friend) => {
                 return <li key={ friend }><a href={`/users/${ friend }`}>
                   <img src={`https://github.com/${ friend }.png`} />
                   <span>{ friend }</span>
                 </a></li>
               })}
-            </ul>
+            </ul> */}
+
+            <ProfileRelationsGallery list={friendList} listType="friend"></ProfileRelationsGallery>
           
           </ProfileRelationsBoxWrapper>
-          
+
           <ProfileRelationsBoxWrapper>
 
             <h2 className="smallTitle">
               Comunidades ({ communitiesList.length })
             </h2>
 
-            <ul>
-              { communitiesList.length > 0 ? communitiesList.map((community) => {
-                return <li key={ community.id }><a href={`/users/${ community.title }`}>
-                  <img src={ community.image } />
-                  <span>{ community.title }</span>
-                </a></li>
-              }) : <p>Crie ou entre em alguma comunidade!</p>}
-            </ul>
+            <ProfileRelationsGallery list={communitiesList} listType="community"></ProfileRelationsGallery>
 
           </ProfileRelationsBoxWrapper>
 
