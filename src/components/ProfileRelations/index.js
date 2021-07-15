@@ -76,13 +76,13 @@ export const ProfileRelationsGallery = function(props) {
       return {
         id: data.id,
         title: data.login,
-        image: data.avatar_url,
+        imageUrl: data.avatar_url,
         link: data.url,
       }
     }
     return {
       ...data,
-      link: `/communities/${ data.title }`
+      link: `/communities/${ data.id }`
     };
   }
 
@@ -94,7 +94,7 @@ export const ProfileRelationsGallery = function(props) {
             { listToShow.map((item) => {
                 item = treatData(item);
                 return <li key={ item.id }><a href={ item.link }>
-                  <img src={ item.image } />
+                  <img src={ item.imageUrl } />
                   <span>{ item.title }</span>
                 </a></li>
               }) }

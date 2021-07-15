@@ -4,6 +4,9 @@ Disponível em: https://alurakut-danielins.vercel.app/
 
 ## CHANGELOG
 
+**(2021-07-16)**
+Conteúdo da Aula 4 adicionado.
+
 **(2021-07-15)**
 Conteúdo da Aula 3 adicionado.
 

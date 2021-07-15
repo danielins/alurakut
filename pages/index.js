@@ -41,12 +41,24 @@ export default function Home() {
     e.preventDefault();
 
     const data = new FormData(e.target);
-    
-    setCommunity( [...communitiesList, {
-      id: + new Date(),
+
+    const newCommunity = {
       title: data.get('title'),
-      image: data.get('image') || 'https://alurakut.vercel.app/capa-comunidade-01.jpg'
-    }]);
+      creatorSlug: myUser,
+      imageUrl: data.get('image') || 'https://alurakut.vercel.app/capa-comunidade-01.jpg'
+    };
+
+    fetch('/api/communities', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify( newCommunity )
+    })
+    .then(async res => {
+      const data = await res.json();
+      setCommunity([...communitiesList, newCommunity]);
+    });
 
   }
 
@@ -54,9 +66,31 @@ export default function Home() {
 
   const [friends, setFriends] = React.useState([]);
   React.useEffect(() => {
-    fetch('https://api.github.com/users/peas/followers')
+
+    fetch('https://api.github.com/users/github/followers')
     .then(res => res.json())
     .then(data => setFriends(data));
+
+    // GraphQL
+    fetch('https://graphql.datocms.com/', { 
+      method: 'POST',
+      headers: {
+        'Authorization': '15f9d858d878eb15abf081d7348642',
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify({'query': `query {
+        allCommunities {
+          id
+          title
+          imageUrl
+          creatorSlug
+        }
+      }`})
+    })
+    .then(res => res.json())
+    .then(data => setCommunity(data.data.allCommunities));
+
   }, [])
 
   return (
