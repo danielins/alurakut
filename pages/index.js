@@ -50,6 +50,15 @@ export default function Home() {
 
   }
 
+  // morap91620@godpeed.com
+
+  const [friends, setFriends] = React.useState([]);
+  React.useEffect(() => {
+    fetch('https://api.github.com/users/peas/followers')
+    .then(res => res.json())
+    .then(data => setFriends(data));
+  }, [])
+
   return (
     <>
       <AlurakutMenu myUser={ myUser }/>
@@ -93,19 +102,10 @@ export default function Home() {
         <div className="relationsArea" style={{ gridArea: 'relationsArea' }}>
           <ProfileRelationsBoxWrapper>
             <h2 className="smallTitle">
-              Pessoas da comunidade ({ friendList.length })
+              Amigos ({ friends.length })
             </h2>
 
-            {/* <ul>
-              { friendList.length > 0 && friendList.map((friend) => {
-                return <li key={ friend }><a href={`/users/${ friend }`}>
-                  <img src={`https://github.com/${ friend }.png`} />
-                  <span>{ friend }</span>
-                </a></li>
-              })}
-            </ul> */}
-
-            <ProfileRelationsGallery list={friendList} listType="friend"></ProfileRelationsGallery>
+            <ProfileRelationsGallery list={ friends } listType="friend"></ProfileRelationsGallery>
           
           </ProfileRelationsBoxWrapper>
 

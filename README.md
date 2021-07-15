@@ -4,6 +4,9 @@ Disponível em: https://alurakut-danielins.vercel.app/
 
 ## CHANGELOG
 
+**(2021-07-15)**
+Conteúdo da Aula 3 adicionado.
+
 **(2021-07-14)**
 Desafios da Aula 2 adicionados:
 - Componente de galeria (amigos e comunidades) com no máximo 6 itens 

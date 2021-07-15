@@ -71,12 +71,13 @@ export const ProfileRelationsGallery = function(props) {
   }
 
   const treatData = function( data ){
+
     if ( props.listType === "friend" ) {
       return {
-        id: data,
-        title: data,
-        image: `https://github.com/${ data }.png`,
-        link: `/users/${ data }`,
+        id: data.id,
+        title: data.login,
+        image: data.avatar_url,
+        link: data.url,
       }
     }
     return {
